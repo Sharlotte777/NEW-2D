@@ -15,7 +15,6 @@ public class EnemyAttack : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        Debug.Log($"Враг получил урон, здоровье осталось: {_health}");
 
         if (_health <= 0)
         {

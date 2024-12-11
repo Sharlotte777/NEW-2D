@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InputReader))]
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private int _damage;
 
     private float _rechargeTime = 1f;
-    private int _attackKey = 0;
     private float _timeBetweenAttack;
+    private InputReader _reader;
+
+    private void Awake()
+    {
+        _reader = GetComponent<InputReader>();
+    }
 
     public void Hit(EnemyAttack enemy)
     {
-        if (Input.GetMouseButton(_attackKey))
+        if (_reader.CheckForAttackKeyPress())
         {
             if (_timeBetweenAttack <= 0)
             {

@@ -10,7 +10,6 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        Debug.Log($"Игрок получил урон, здоровье осталось: {_health}");
 
         if (_health <= 0)
         {

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class SpawnerOfCoin : MonoBehaviour
 {
     [SerializeField][Range(1, 10)] private float _timeToSpawn = 5f;
     [SerializeField] private List<SpawnPoint> _spawnPoints;
-    [SerializeField] private FirstAidKit _firstAidKitPrefab;
+    [SerializeField] private Coin _coinPrefab;
 
     private float _radius = 1f;
 
@@ -37,14 +37,14 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < objects.Length; i++)
         {
-            if (objects[i].gameObject.TryGetComponent(out FirstAidKit first))
+            if (objects[i].gameObject.TryGetComponent(out Coin coin))
             {
                 break;
             }
             else
             {
-                Instantiate(_firstAidKitPrefab, spawnPoint.transform.position, Quaternion.identity);
-            }
+                Instantiate(_coinPrefab, spawnPoint.transform.position, Quaternion.identity);
+            }       
         }
     }
 }

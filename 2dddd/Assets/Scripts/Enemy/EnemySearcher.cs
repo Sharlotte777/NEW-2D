@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyAttack))]
-public class EnemySearch : MonoBehaviour
+public class EnemySearcher : MonoBehaviour
 {
     [SerializeField] private Transform[] _moveSpots;
 
@@ -16,7 +16,7 @@ public class EnemySearch : MonoBehaviour
         _enemyAttack = GetComponent<EnemyAttack>();
     }
 
-    public Transform StartDetection()
+    public Transform GetTargetToFollow()
     {
         Transform objectToFollow = _moveSpots[_currentPoint];
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, _radiusToFollow);

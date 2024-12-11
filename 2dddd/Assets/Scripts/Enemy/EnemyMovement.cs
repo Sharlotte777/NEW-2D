@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(EnemySearch))]
+[RequireComponent(typeof(EnemySearcher))]
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    private EnemySearch _enemySearch;
+    private EnemySearcher _enemySearch;
 
     private void Awake()
     {
-        _enemySearch = GetComponent<EnemySearch>();
+        _enemySearch = GetComponent<EnemySearcher>();
     }
 
     private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, _enemySearch.StartDetection().position, _speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, _enemySearch.GetTargetToFollow().position, _speed * Time.deltaTime);
     }
 }

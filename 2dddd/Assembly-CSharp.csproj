@@ -69,8 +69,10 @@
     <Compile Include="Assets\Scripts\Items\Coin.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSearch.cs" />
     <Compile Include="Assets\Scripts\Spawner\SpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Player\InputReader.cs" />
+    <Compile Include="Assets\Scripts\Spawner\SpawnerOfCoin.cs" />
     <Compile Include="Assets\Scripts\Items\FirstAidKit.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemySearch.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemySearcher.cs" />
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
   </ItemGroup>

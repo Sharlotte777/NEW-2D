@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerSearch))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(InputReader))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speedOfMovement;
@@ -18,14 +19,15 @@ public class PlayerMovement : MonoBehaviour
     private PlayerSearch _search;
     private Rigidbody2D _rigidBody;
     private Animator _animator;
+    private InputReader _inputReader;
     private bool _turnedToTheRight = true;
-    private KeyCode _jumpKey = KeyCode.Space;
 
     private void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _search = GetComponent<PlayerSearch>();
+        _inputReader = GetComponent<InputReader>();
     }
 
     private void Update()
@@ -42,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
 
-        if (Input.GetKeyDown(_jumpKey) && _isGrounded)
+        if (_inputReader.CheckForJumpKeyPress() && _isGrounded)
         {
             _isJump = true;
         }
