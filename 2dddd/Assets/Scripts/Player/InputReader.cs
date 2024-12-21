@@ -7,23 +7,18 @@ public class InputReader : MonoBehaviour
     private int _attackKey = 0;
     private KeyCode _jumpKey = KeyCode.Space;
 
-    public bool CheckForAttackKeyPress()
+    public bool CanAttack()
     {
-        if (Input.GetMouseButton(_attackKey))
-        {
-            return true;
-        }
-
-        return false;
+        return (Input.GetMouseButton(_attackKey));
     }
 
-    public bool CheckForJumpKeyPress()
+    public bool CanJump()
     {
-        if (Input.GetKeyDown(_jumpKey))
-        {
-            return true;
-        }
+        return (Input.GetKeyDown(_jumpKey));
+    }
 
-        return false;
+    public float ReturnAxis(string axis)
+    {
+        return Input.GetAxis(axis);
     }
 }

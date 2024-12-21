@@ -60,21 +60,23 @@
     <Analyzer Include="D:\Games\unity\2022.3.33f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Enemy\EnemyAttack.cs" />
+    <Compile Include="Assets\Scripts\Enemy\BearMovement.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerHealth.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
-    <Compile Include="Assets\Scripts\Ground.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerMover.cs" />
+    <Compile Include="Assets\Scripts\Enemy\BearSearcher.cs" />
+    <Compile Include="Assets\Scripts\Player\FoxSearcher.cs" />
     <Compile Include="Assets\Scripts\Items\Coin.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerSearch.cs" />
     <Compile Include="Assets\Scripts\Spawner\SpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Spawner\SpawnerOfFirstAidKit.cs" />
     <Compile Include="Assets\Scripts\Player\InputReader.cs" />
     <Compile Include="Assets\Scripts\Spawner\SpawnerOfCoin.cs" />
+    <Compile Include="Assets\Scripts\Player\FoxHealth.cs" />
     <Compile Include="Assets\Scripts\Items\FirstAidKit.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemySearcher.cs" />
+    <Compile Include="Assets\Scripts\Ground\Ground.cs" />
+    <Compile Include="Assets\Scripts\Player\FoxMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemy\BearAttack.cs" />
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerCombat.cs" />
+    <Compile Include="Assets\Scripts\Player\FoxCombat.cs" />
+    <Compile Include="Assets\Scripts\Ground\GroundDetector.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
