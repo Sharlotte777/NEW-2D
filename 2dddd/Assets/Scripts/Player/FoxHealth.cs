@@ -1,38 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FoxHealth : MonoBehaviour
 {
-    private int _health = 100;
-    private int _maxHealth = 100;
+    public event Action AmountChanged;
+
+    public float Health { get; private set; } = 100f;
+    public float MaxHealth { get; private set; } = 100f;
+    public bool IsAlive { get; private set; } = true;
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
+        Health -= damage;
 
-        if (_health <= 0)
+        if (Health <= 0)
         {
             gameObject.SetActive(false);
+            IsAlive = false;
         }
+
+        AmountChanged?.Invoke();
     }
 
     public bool HaveRecovered(int recoveryAmount)
     {
-        if (_health < _maxHealth)
+        if (!HaveMaxHealth())
         {
-            if (_health + recoveryAmount > _maxHealth)
-            {
-                _health = _maxHealth;
-            }
-            else
-            {
-                _health += recoveryAmount;
-            }
+            Recover(recoveryAmount);
 
             return true;
         }
 
         return false;
+    }
+
+    public void Recover(int recoveryAmount)
+    {
+        if (Health + recoveryAmount > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
+        else
+        {
+            Health += recoveryAmount;
+        }
+
+        AmountChanged?.Invoke();
+    }
+
+    private bool HaveMaxHealth()
+    {
+        return Health >= MaxHealth;
     }
 }
