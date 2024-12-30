@@ -2587,7 +2587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877166470}
   - component: {fileID: 1877166472}
-  - component: {fileID: 1877166471}
+  - component: {fileID: 1877166473}
   m_Layer: 5
   m_Name: SliderSmoothBarHealth
   m_TagString: Untagged
@@ -2616,21 +2616,6 @@ RectTransform:
   m_AnchoredPosition: {x: -275, y: 27}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1877166471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877166469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035796a13abb3ed49b8334967d0a8a43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _smoothSlideDifference: 0.5
-  _smoothHealthBar: {fileID: 1877166472}
-  _foxHealth: {fileID: 380397930}
 --- !u!114 &1877166472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2682,6 +2667,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1877166473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877166469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035796a13abb3ed49b8334967d0a8a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: 380397930}
+  _text: {fileID: 1634073963}
+  _healthBar: {fileID: 1877166472}
+  _smoothSlideDifference: 0.5
 --- !u!1 &1887836953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,8 +2867,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 667e5daa69c7bbf4dada3fa699e0e67a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: {fileID: 380397930}
+  _text: {fileID: 1634073963}
   _healthBar: {fileID: 2089033479}
-  _healthPlayer: {fileID: 380397930}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

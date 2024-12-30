@@ -3,25 +3,25 @@ using TMPro;
 
 public class TextHealthBar : MonoBehaviour
 {
-    [SerializeField] private FoxHealth _health;
-    [SerializeField] private TMP_Text _text;
+    [SerializeField] protected FoxHealth _health;
+    [SerializeField] protected TMP_Text _text;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         UpdateValue();
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _health.AmountChanged += UpdateValue;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         _health.AmountChanged -= UpdateValue;
     }
 
-    private void UpdateValue()
+    protected virtual void UpdateValue()
     {
         if (_health.IsAlive)
             _text.SetText($"{_health.Health} / {_health.MaxHealth}");
