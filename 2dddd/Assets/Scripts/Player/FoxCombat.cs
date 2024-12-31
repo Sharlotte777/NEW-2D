@@ -16,7 +16,7 @@ public class FoxCombat : MonoBehaviour
         _reader = GetComponent<InputReader>();
     }
 
-    public void Hit(BearAttack enemy)
+    public void Hit(BearHealth enemy)
     {
         if (_reader.CanAttack())
         {

@@ -45,7 +45,7 @@ public class FoxSearcher : MonoBehaviour
 
         for (int i = 0; i < objects.Length; i++)
         {
-            if (objects[i].gameObject.TryGetComponent(out BearAttack enemy))
+            if (objects[i].gameObject.TryGetComponent(out BearHealth enemy))
             {
                 _attack.Hit(enemy);
             }

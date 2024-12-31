@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BearAttack))]
+[RequireComponent(typeof(BearHealth))]
 public class BearSearcher : MonoBehaviour
 {
     [SerializeField] private Transform[] _moveSpots;
