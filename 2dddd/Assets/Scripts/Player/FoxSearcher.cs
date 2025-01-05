@@ -24,17 +24,16 @@ public class FoxSearcher : MonoBehaviour
         {
             if (item is FirstAidKit)
             {
-                FirstAidKit firstAidKit = item as FirstAidKit;
+                FirstAidKit firstAidKit = (FirstAidKit)item;
 
                 if (_health.HaveRecovered(firstAidKit.RecoveryAmount))
                 {
-                    Destroy(firstAidKit.gameObject);
+                    Destroy(item.gameObject);
                 }
             }
             else if(item is Coin)
             {
-                Coin coin = item as Coin;
-                Destroy(coin.gameObject);
+                Destroy(item.gameObject);
             }
         }
     }

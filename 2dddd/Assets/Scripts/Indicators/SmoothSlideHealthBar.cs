@@ -15,7 +15,7 @@ public class SmoothSlideHealthBar : HealthBar
             StopCoroutine(_coroutine);
         }
 
-        _coroutine = StartCoroutine(SmoothChangeSliderNumber(_health.Health));
+        _coroutine = StartCoroutine(SmoothChangeSliderNumber(_health.RealHealth));
     }
 
     private IEnumerator SmoothChangeSliderNumber(float goal)

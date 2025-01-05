@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Player\FoxCombat.cs" />
     <Compile Include="Assets\Scripts\Indicators\TextHealthBar.cs" />
+    <Compile Include="Assets\Scripts\Indicators\Health.cs" />
     <Compile Include="Assets\Scripts\Ground\GroundDetector.cs" />
   </ItemGroup>
   <ItemGroup>

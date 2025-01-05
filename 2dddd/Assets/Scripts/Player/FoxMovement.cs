@@ -41,12 +41,12 @@ public class FoxMovement : MonoBehaviour
         {
             Flip();
         }
-        else if (_turnedToTheRight == true && movement < 0)
+        else if (_turnedToTheRight && movement < 0)
         {
             Flip();
         }
 
-        if (_inputReader.CanJump() && _groundDetector.IsGrounded())
+        if (_inputReader.CanJump && _groundDetector.IsGrounded())
         {
             _isJump = true;
         }

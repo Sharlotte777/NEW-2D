@@ -8,6 +8,6 @@ public class HealthBar : TextHealthBar
 
     protected override void UpdateValue()
     {
-        _healthBar.value = _health.Health / _health.MaxHealth;
+        _healthBar.value = _health.RealHealth / _health.MaxHealth;
     }
 }

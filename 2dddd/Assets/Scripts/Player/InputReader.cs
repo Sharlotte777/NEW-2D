@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
+    public bool CanJump { get; private set; }
+    public bool CanAttack { get; private set; }
+
     private int _attackKey = 0;
     private KeyCode _jumpKey = KeyCode.Space;
 
-    public bool CanAttack()
+    public void Update()
     {
-        return (Input.GetMouseButton(_attackKey));
-    }
-
-    public bool CanJump()
-    {
-        return (Input.GetKeyDown(_jumpKey));
+        if (Input.GetMouseButton(_attackKey))
+        {
+            CanAttack = true;
+        }
+        else if (Input.GetKeyDown(_jumpKey))
+        {
+            CanJump = true;
+        }
+        else
+        {
+            CanJump = false;
+            CanAttack = false;
+        }
     }
 
     public float ReturnAxis(string axis)

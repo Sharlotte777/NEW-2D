@@ -18,7 +18,7 @@ public class FoxCombat : MonoBehaviour
 
     public void Hit(BearHealth enemy)
     {
-        if (_reader.CanAttack())
+        if (_reader.CanAttack)
         {
             if (_timeBetweenAttack <= 0)
             {
