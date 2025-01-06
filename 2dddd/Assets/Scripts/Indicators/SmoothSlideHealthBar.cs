@@ -20,7 +20,7 @@ public class SmoothSlideHealthBar : HealthBar
 
     private IEnumerator SmoothChangeSliderNumber(float goal)
     {
-        goal = goal / _health.MaxHealth;
+        goal /= _health.MaxHealth;
 
         while (_healthBar.value != goal)
         {

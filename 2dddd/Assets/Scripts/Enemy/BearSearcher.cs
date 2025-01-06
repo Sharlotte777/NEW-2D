@@ -14,10 +14,12 @@ public class BearSearcher : MonoBehaviour
     private bool _turnedToTheRight = true;
     private float _radiusToFollow = 3f;
     private BearAttack _enemyAttack;
+    private SpriteRenderer _sprite;
 
     private void Awake()
     {
         _enemyAttack = GetComponent<BearAttack>();
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
     public Transform GetTargetToFollow()
@@ -54,10 +56,15 @@ public class BearSearcher : MonoBehaviour
 
     private void Flip()
     {
-        int rotationDegrees = 180;
-        _turnedToTheRight = !_turnedToTheRight;
-        Vector2 rotate = transform.eulerAngles;
-        rotate.y += rotationDegrees;
-        transform.rotation = Quaternion.Euler(rotate);
+        if (_turnedToTheRight)
+        {
+            _sprite.flipX = true;
+            _turnedToTheRight = !_turnedToTheRight;
+        }
+        else
+        {
+            _sprite.flipX = false;
+            _turnedToTheRight = !_turnedToTheRight;
+        }
     }
 }

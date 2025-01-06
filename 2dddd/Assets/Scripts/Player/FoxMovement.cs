@@ -21,6 +21,7 @@ public class FoxMovement : MonoBehaviour
     private Animator _animator;
     private GroundDetector _groundDetector;
     private InputReader _inputReader;
+    private SpriteRenderer _spriteRenderer;
     private bool _turnedToTheRight = true;
 
     private void Awake()
@@ -30,6 +31,7 @@ public class FoxMovement : MonoBehaviour
         _search = GetComponent<FoxSearcher>();
         _groundDetector = GetComponent<GroundDetector>();
         _inputReader = GetComponent<InputReader>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -67,10 +69,15 @@ public class FoxMovement : MonoBehaviour
 
     private void Flip()
     {
-        int rotationDegrees = 180;
-        _turnedToTheRight = !_turnedToTheRight;
-        Vector2 rotate = transform.eulerAngles;
-        rotate.y += rotationDegrees;
-        transform.rotation = Quaternion.Euler(rotate);
+        if (_turnedToTheRight)
+        {
+            _spriteRenderer.flipX = true;
+            _turnedToTheRight = !_turnedToTheRight;
+        }
+        else
+        {
+            _spriteRenderer.flipX = false;
+            _turnedToTheRight = !_turnedToTheRight;
+        }
     }
 }
