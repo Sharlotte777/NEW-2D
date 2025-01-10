@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(FoxSearcher))]
+[RequireComponent(typeof(TargetSearcer))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(GroundDetector))]
 [RequireComponent(typeof(InputReader))]
@@ -16,7 +16,7 @@ public class FoxMovement : MonoBehaviour
 
     private bool _isJump = false;
     private float movement = 0f;
-    private FoxSearcher _search;
+    private TargetSearcer _search;
     private Rigidbody2D _rigidBody;
     private Animator _animator;
     private GroundDetector _groundDetector;
@@ -28,7 +28,7 @@ public class FoxMovement : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _search = GetComponent<FoxSearcher>();
+        _search = GetComponent<TargetSearcer>();
         _groundDetector = GetComponent<GroundDetector>();
         _inputReader = GetComponent<InputReader>();
         _spriteRenderer = GetComponent<SpriteRenderer>();

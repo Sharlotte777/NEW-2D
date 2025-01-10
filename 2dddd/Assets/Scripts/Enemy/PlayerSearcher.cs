@@ -4,9 +4,10 @@ using UnityEngine;
 
 [RequireComponent(typeof(BearAttack))]
 [RequireComponent(typeof(BearHealth))]
-public class BearSearcher : MonoBehaviour
+public class PlayerSearcher : MonoBehaviour
 {
     [SerializeField] private Transform[] _moveSpots;
+    [SerializeField] private float _timeToRepeat = 0.01f;
 
     private int _currentPoint = 0;
     private int _indexOfLeftPoint = 0;
@@ -15,17 +16,20 @@ public class BearSearcher : MonoBehaviour
     private float _radiusToFollow = 3f;
     private BearAttack _enemyAttack;
     private SpriteRenderer _sprite;
+    private bool _isWorking = true;
+    private WaitForSeconds _wait;
+    private Collider2D[] _objects;
 
     private void Awake()
     {
         _enemyAttack = GetComponent<BearAttack>();
         _sprite = GetComponent<SpriteRenderer>();
+        StartCoroutine(SearchObjects());
     }
 
-    public Transform GetTargetToFollow()
+    public Vector2 GetTargetToFollow()
     {
         Transform objectToFollow = _moveSpots[_currentPoint];
-        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, _radiusToFollow);
 
         if (transform.position == objectToFollow.position)
         {
@@ -41,9 +45,9 @@ public class BearSearcher : MonoBehaviour
             _currentPoint = ++_currentPoint % _moveSpots.Length;
         }
 
-        for (int i = 0; i < objects.Length; i++)
+        for (int i = 0; i < _objects.Length; i++)
         {
-            if (objects[i].gameObject.TryGetComponent(out FoxHealth player))
+            if (_objects[i].gameObject.TryGetComponent(out FoxHealth player))
             {
                 objectToFollow = player.transform;
 
@@ -51,7 +55,18 @@ public class BearSearcher : MonoBehaviour
             }
         }
 
-        return objectToFollow;
+        return objectToFollow.position;
+    }
+
+    private IEnumerator SearchObjects()
+    {
+        _wait = new WaitForSeconds(_timeToRepeat);
+
+        while (_isWorking)
+        {
+            _objects = Physics2D.OverlapCircleAll(transform.position, _radiusToFollow);
+            yield return _wait;
+        }
     }
 
     private void Flip()
