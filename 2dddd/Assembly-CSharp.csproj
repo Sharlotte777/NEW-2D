@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Spawner\SpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Spawner\SpawnerOfFirstAidKit.cs" />
     <Compile Include="Assets\Scripts\Player\InputReader.cs" />
+    <Compile Include="Assets\Scripts\Indicators\TimeOfVampirism.cs" />
     <Compile Include="Assets\Scripts\Spawner\SpawnerOfCoin.cs" />
     <Compile Include="Assets\Scripts\Player\FoxHealth.cs" />
     <Compile Include="Assets\Scripts\Enemy\PlayerSearcher.cs" />

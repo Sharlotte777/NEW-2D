@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,16 +12,23 @@ public class Vampirism : MonoBehaviour
 
     [SerializeField] private int _amountOfDamage = 5;
 
+    public event Action AmountChanged;
+
     private InputReader _inputReader;
     private TargetSearcer _targetSearcer;
-    private float _remainingTime;
+    private BearHealth enemy;
     private bool _isWorking;
     private WaitForSeconds _wait;
+    private WaitForSeconds _waitForSecond;
+
+    public float RemainingTime { get; private set; }
 
     private void Awake()
     {
         _inputReader = GetComponent<InputReader>();
         _targetSearcer = GetComponent<TargetSearcer>();
+        RemainingTime = Lasting;
+        AmountChanged?.Invoke();
     }
 
     private void Update()
@@ -41,23 +49,28 @@ public class Vampirism : MonoBehaviour
 
     private IEnumerator StartDrain()
     {
-        BearHealth bear = _targetSearcer.SearchEnemy();
-        _remainingTime = Lasting; 
         _isWorking = true;
         _wait = new WaitForSeconds(TimeToRecharge);
+        _waitForSecond = new WaitForSeconds(1f);
 
-        while (_remainingTime > 0)
+        while (RemainingTime > 0)
         {
-            if (bear != null)
+            enemy = _targetSearcer.SearchEnemyForVampirism();
+
+            if (enemy != null)
             {
-                yield return new WaitForSeconds(2f);
-                bear.TakeDamage(_amountOfDamage);
+                yield return _waitForSecond;
+                enemy.TakeDamage(_amountOfDamage);
             }
 
-            _remainingTime--;
+            RemainingTime--;
+            yield return _waitForSecond;
+            AmountChanged?.Invoke();
         }
 
         yield return _wait;
+        RemainingTime = Lasting;
         _isWorking = false;
+        AmountChanged?.Invoke();
     }
 }

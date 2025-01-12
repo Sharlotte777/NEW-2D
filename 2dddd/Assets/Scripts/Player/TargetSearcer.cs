@@ -8,6 +8,7 @@ public class TargetSearcer : MonoBehaviour
 {
     [SerializeField] private Transform _attackPosition;
     [SerializeField] private float _radius;
+    [SerializeField] private SpriteRenderer _circleOfVampirism;
     [SerializeField] private float _timeToRepeat = 0.01f;
 
     private FoxCombat _attack;
@@ -15,9 +16,11 @@ public class TargetSearcer : MonoBehaviour
     private bool _isWorking = true;
     private WaitForSeconds _wait;
     private Collider2D[] _objects;
+    private float _radiousOfVampirism;
 
     private void Awake()
     {
+        _radiousOfVampirism = _circleOfVampirism.transform.localScale.x;
         _attack = GetComponent<FoxCombat>();
         _health = GetComponent<FoxHealth>();
         StartCoroutine(SearchElements());
@@ -43,6 +46,21 @@ public class TargetSearcer : MonoBehaviour
         }
     }
 
+    public BearHealth SearchEnemyForVampirism()
+    {
+        Collider2D[] objects = SearchForVampirism();
+
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (objects[i].gameObject.TryGetComponent(out BearHealth enemy))
+            {
+                return enemy;
+            }
+        }
+
+        return null;
+    }
+
     public void StartDetection()
     {
         BearHealth enemy = SearchEnemy();
@@ -53,7 +71,13 @@ public class TargetSearcer : MonoBehaviour
         }
     }
 
-    public BearHealth SearchEnemy()
+    private Collider2D[] SearchForVampirism()
+    {
+        Collider2D[] objects = Physics2D.OverlapCircleAll(_attackPosition.position, _radiousOfVampirism);
+        return objects;
+    }
+
+    private BearHealth SearchEnemy()
     {
         for (int i = 0; i < _objects.Length; i++)
         {
