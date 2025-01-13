@@ -10,15 +10,26 @@ public class FoxCombat : MonoBehaviour
     private float _rechargeTime = 1f;
     private float _timeBetweenAttack;
     private InputReader _reader;
+    private bool _isAttacking = false;
 
     private void Awake()
     {
         _reader = GetComponent<InputReader>();
     }
 
+    private void OnEnable()
+    {
+        _reader.AbilityOfAttackChanged += ChangeAbilityOfAttack;
+    }
+
+    private void OnDisable()
+    {
+        _reader.AbilityOfAttackChanged -= ChangeAbilityOfAttack;
+    }
+
     public void Hit(BearHealth enemy)
     {
-        if (_reader.CanAttack)
+        if (_isAttacking)
         {
             if (_timeBetweenAttack <= 0)
             {
@@ -29,6 +40,18 @@ public class FoxCombat : MonoBehaviour
             {
                 _timeBetweenAttack -= Time.deltaTime;
             }
+        }
+    }
+
+    private void ChangeAbilityOfAttack()
+    {
+        if ( _isAttacking)
+        {
+            _isAttacking = false;
+        }
+        else
+        {
+            _isAttacking = true;
         }
     }
 }

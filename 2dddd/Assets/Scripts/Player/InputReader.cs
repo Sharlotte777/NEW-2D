@@ -1,22 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    public bool CanJump { get; private set; }
-    public bool CanAttack { get; private set; }
-    public bool CanDrainEnemy { get; private set; }
+    public event Action AbilityOfAttackChanged;
+    public event Action AbilityOfDrainChanged;
 
     private int _attackKey = 0;
     private KeyCode _jumpKey = KeyCode.Space;
     private KeyCode _vampirismKey = KeyCode.E;
 
+    public bool CanJump { get; private set; }
+
     public void Update()
     {
         if (Input.GetMouseButton(_attackKey))
         {
-            CanAttack = true;
+            AbilityOfAttackChanged?.Invoke();
         }
         else if (Input.GetKeyDown(_jumpKey))
         {
@@ -24,13 +24,11 @@ public class InputReader : MonoBehaviour
         }
         else if (Input.GetKeyDown(_vampirismKey))
         {
-            CanDrainEnemy = true;
+            AbilityOfDrainChanged?.Invoke();
         }
         else
         {
             CanJump = false;
-            CanAttack = false;
-            CanDrainEnemy = false;
         }
     }
 

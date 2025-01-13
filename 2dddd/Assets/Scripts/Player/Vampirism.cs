@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader))]
 [RequireComponent(typeof(TargetSearcer))]
+[RequireComponent(typeof(FoxHealth))]
 public class Vampirism : MonoBehaviour
 {
     private const float Lasting = 6f;
@@ -16,7 +16,8 @@ public class Vampirism : MonoBehaviour
 
     private InputReader _inputReader;
     private TargetSearcer _targetSearcer;
-    private BearHealth enemy;
+    private FoxHealth _foxHealth;
+    private bool _isDrainingEnemy = false;
     private bool _isWorking;
     private WaitForSeconds _wait;
     private WaitForSeconds _waitForSecond;
@@ -27,16 +28,19 @@ public class Vampirism : MonoBehaviour
     {
         _inputReader = GetComponent<InputReader>();
         _targetSearcer = GetComponent<TargetSearcer>();
+        _foxHealth = GetComponent<FoxHealth>();
         RemainingTime = Lasting;
         AmountChanged?.Invoke();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (_inputReader.CanDrainEnemy)
-        {
-            DrainEnemy();
-        }
+        _inputReader.AbilityOfDrainChanged += ChangeAbilityOfDrain;
+    }
+
+    private void OnDisable()
+    {
+        _inputReader.AbilityOfDrainChanged -= ChangeAbilityOfDrain;
     }
 
     public void DrainEnemy()
@@ -47,9 +51,23 @@ public class Vampirism : MonoBehaviour
         }
     }
 
+    private void ChangeAbilityOfDrain()
+    {
+        if (_isDrainingEnemy)
+        {
+            _isDrainingEnemy = false;
+        }
+        else
+        {
+            DrainEnemy();
+            _isDrainingEnemy = true;
+        }
+    }
+
     private IEnumerator StartDrain()
     {
         _isWorking = true;
+        BearHealth enemy = null;
         _wait = new WaitForSeconds(TimeToRecharge);
         _waitForSecond = new WaitForSeconds(1f);
 
@@ -61,6 +79,7 @@ public class Vampirism : MonoBehaviour
             {
                 yield return _waitForSecond;
                 enemy.TakeDamage(_amountOfDamage);
+                _foxHealth.Recover(_amountOfDamage);
             }
 
             RemainingTime--;

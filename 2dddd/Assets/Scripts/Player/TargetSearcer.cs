@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(FoxCombat))]
@@ -48,14 +47,11 @@ public class TargetSearcer : MonoBehaviour
 
     public BearHealth SearchEnemyForVampirism()
     {
-        Collider2D[] objects = SearchForVampirism();
+        Collider2D target = SearchForVampirism();
 
-        for (int i = 0; i < objects.Length; i++)
+        if (target.TryGetComponent(out BearHealth enemy))
         {
-            if (objects[i].gameObject.TryGetComponent(out BearHealth enemy))
-            {
-                return enemy;
-            }
+            return enemy;
         }
 
         return null;
@@ -71,10 +67,11 @@ public class TargetSearcer : MonoBehaviour
         }
     }
 
-    private Collider2D[] SearchForVampirism()
+    private Collider2D SearchForVampirism()
     {
-        Collider2D[] objects = Physics2D.OverlapCircleAll(_attackPosition.position, _radiousOfVampirism);
-        return objects;
+        int targetLayer = 1;
+        Collider2D target = Physics2D.OverlapCircle(_attackPosition.position, _radiousOfVampirism, targetLayer);
+        return target;
     }
 
     private BearHealth SearchEnemy()
