@@ -8,7 +8,7 @@ public class TextHealthBar : HealthBar
     protected override void UpdateValue()
     {
         if (_health.IsAlive)
-            _text.SetText($"{_health.RealHealth} / {_health.MaxHealth}");
+            _text.SetText($"{_health.CurrentValue} / {_health.MaxValue}");
         else
             _text.SetText("Мертв");
     }

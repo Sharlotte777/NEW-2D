@@ -24,6 +24,6 @@ public class HealthBar : MonoBehaviour
 
     protected virtual void UpdateValue()
     {
-        _healthBar.value = _health.RealHealth / _health.MaxHealth;
+        _healthBar.value = _health.CurrentValue / _health.MaxValue;
     }
 }

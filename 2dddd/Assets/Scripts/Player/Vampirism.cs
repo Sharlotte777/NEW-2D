@@ -31,6 +31,8 @@ public class Vampirism : MonoBehaviour
         _foxHealth = GetComponent<FoxHealth>();
         RemainingTime = Lasting;
         AmountChanged?.Invoke();
+        _wait = new WaitForSeconds(TimeToRecharge);
+        _waitForSecond = new WaitForSeconds(1f);
     }
 
     private void OnEnable()
@@ -68,8 +70,6 @@ public class Vampirism : MonoBehaviour
     {
         _isWorking = true;
         BearHealth enemy = null;
-        _wait = new WaitForSeconds(TimeToRecharge);
-        _waitForSecond = new WaitForSeconds(1f);
 
         while (RemainingTime > 0)
         {

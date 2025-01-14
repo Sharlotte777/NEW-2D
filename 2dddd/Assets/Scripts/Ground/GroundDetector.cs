@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class GroundDetector : MonoBehaviour
 {
-    private int _isGrounded = 0;
+    private int _amountOfTouchingGround = 0;
 
     public bool IsGrounded()
     {
-        return _isGrounded > 0;
+        return _amountOfTouchingGround > 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Ground _))
         {
-            _isGrounded++;
+            _amountOfTouchingGround++;
         }
     }
 
@@ -23,7 +23,7 @@ public class GroundDetector : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Ground _))
         {
-            _isGrounded--;
+            _amountOfTouchingGround--;
         }
     }
 }

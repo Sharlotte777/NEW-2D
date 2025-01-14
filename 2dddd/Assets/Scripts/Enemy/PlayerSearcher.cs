@@ -3,18 +3,16 @@ using UnityEngine;
 
 [RequireComponent(typeof(BearAttack))]
 [RequireComponent(typeof(BearHealth))]
+[RequireComponent(typeof(BearMovement))]
 public class PlayerSearcher : MonoBehaviour
 {
     [SerializeField] private Transform[] _moveSpots;
     [SerializeField] private float _timeToRepeat = 0.01f;
 
     private int _currentPoint = 0;
-    private int _indexOfLeftPoint = 0;
-    private int _indexOfRightPoint = 1;
-    private bool _turnedToTheRight = true;
     private float _radiusToFollow = 3f;
     private BearAttack _enemyAttack;
-    private SpriteRenderer _sprite;
+    private BearMovement _enemyMovement;
     private bool _isWorking = true;
     private WaitForSeconds _wait;
     private Collider2D[] _objects;
@@ -22,7 +20,7 @@ public class PlayerSearcher : MonoBehaviour
     private void Awake()
     {
         _enemyAttack = GetComponent<BearAttack>();
-        _sprite = GetComponent<SpriteRenderer>();
+        _enemyMovement = GetComponent<BearMovement>();
         StartCoroutine(SearchObjects());
     }
 
@@ -32,14 +30,7 @@ public class PlayerSearcher : MonoBehaviour
 
         if (transform.position == objectToFollow.position)
         {
-            if ((_currentPoint == _indexOfLeftPoint) & (_turnedToTheRight == false))
-            {
-                Flip();
-            }
-            else if ((_currentPoint == _indexOfRightPoint) & (_turnedToTheRight))
-            {
-                Flip();
-            }
+            _enemyMovement.CheckForFlip(_currentPoint);
 
             _currentPoint = ++_currentPoint % _moveSpots.Length;
         }
@@ -65,20 +56,6 @@ public class PlayerSearcher : MonoBehaviour
         {
             _objects = Physics2D.OverlapCircleAll(transform.position, _radiusToFollow);
             yield return _wait;
-        }
-    }
-
-    private void Flip()
-    {
-        if (_turnedToTheRight)
-        {
-            _sprite.flipX = true;
-            _turnedToTheRight = !_turnedToTheRight;
-        }
-        else
-        {
-            _sprite.flipX = false;
-            _turnedToTheRight = !_turnedToTheRight;
         }
     }
 }

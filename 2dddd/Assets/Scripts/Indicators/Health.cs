@@ -7,35 +7,35 @@ public class Health : MonoBehaviour
 {
     public event Action AmountChanged;
 
-    public float RealHealth { get; private set; } = 100f;
-    public float MaxHealth { get; private set; } = 100f;
+    public float CurrentValue { get; private set; } = 100f;
+    public float MaxValue { get; private set; } = 100f;
     public bool IsAlive { get; private set; } = true;
-    public bool HaveMaxHealth { get; private set; } = true;
+    public bool HaveMaxValue { get; private set; } = true;
 
     public void TakeDamage(int damage)
     {
-        if (RealHealth < damage)
+        if (CurrentValue < damage)
         {
-            RealHealth = 0;
+            CurrentValue = 0;
         }
         else
         {
-            RealHealth -= damage;
+            CurrentValue -= damage;
         }
 
-        if (RealHealth <= 0)
+        if (CurrentValue <= 0)
         {
             gameObject.SetActive(false);
             IsAlive = false;
         }
 
-        HaveMaxHealth = RealHealth >= MaxHealth;
+        HaveMaxValue = CurrentValue >= MaxValue;
         AmountChanged?.Invoke();
     }
 
     public bool HaveRecovered(int recoveryAmount)
     {
-        if (HaveMaxHealth == false)
+        if (HaveMaxValue == false)
         {
             Recover(recoveryAmount);
 
@@ -47,16 +47,16 @@ public class Health : MonoBehaviour
 
     public void Recover(int recoveryAmount)
     {
-        if (RealHealth + recoveryAmount > MaxHealth)
+        if (CurrentValue + recoveryAmount > MaxValue)
         {
-            RealHealth = MaxHealth;
+            CurrentValue = MaxValue;
         }
         else
         {
-            RealHealth += recoveryAmount;
+            CurrentValue += recoveryAmount;
         }
 
-        HaveMaxHealth = RealHealth >= MaxHealth;
+        HaveMaxValue = CurrentValue >= MaxValue;
         AmountChanged?.Invoke();
     }
 }

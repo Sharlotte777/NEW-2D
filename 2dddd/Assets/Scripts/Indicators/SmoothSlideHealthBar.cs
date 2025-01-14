@@ -15,12 +15,12 @@ public class SmoothSlideHealthBar : HealthBar
             StopCoroutine(_coroutine);
         }
 
-        _coroutine = StartCoroutine(SmoothChangeSliderNumber(_health.RealHealth));
+        _coroutine = StartCoroutine(SmoothChangeSliderNumber(_health.CurrentValue));
     }
 
     private IEnumerator SmoothChangeSliderNumber(float goal)
     {
-        goal /= _health.MaxHealth;
+        goal /= _health.MaxValue;
 
         while (_healthBar.value != goal)
         {
