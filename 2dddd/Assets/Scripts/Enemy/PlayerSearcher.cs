@@ -30,7 +30,7 @@ public class PlayerSearcher : MonoBehaviour
 
         if (transform.position == objectToFollow.position)
         {
-            _enemyMovement.CheckForFlip(_currentPoint);
+            _enemyMovement.TurnToDirection(_currentPoint);
 
             _currentPoint = ++_currentPoint % _moveSpots.Length;
         }

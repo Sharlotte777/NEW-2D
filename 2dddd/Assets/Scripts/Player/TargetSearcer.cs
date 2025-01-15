@@ -29,9 +29,9 @@ public class TargetSearcer : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Item item))
         {
-            if (item is FirstAidKit)
+            if (item is FirstAidKit firstAidKit)
             {
-                FirstAidKit firstAidKit = (FirstAidKit)item;
+                firstAidKit = (FirstAidKit)item;
 
                 if (_health.HaveRecovered(firstAidKit.RecoveryAmount))
                 {

@@ -22,7 +22,7 @@ public class BearMovement : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, _enemySearch.GetTargetToFollow(), _speed * Time.deltaTime);
     }
 
-    public void CheckForFlip(int point)
+    public void TurnToDirection(int point)
     {
         if ((point == _indexOfLeftPoint) & (_turnedToTheRight == false))
         {

@@ -45,13 +45,6 @@ public class FoxCombat : MonoBehaviour
 
     private void ChangeAbilityOfAttack()
     {
-        if ( _isAttacking)
-        {
-            _isAttacking = false;
-        }
-        else
-        {
-            _isAttacking = true;
-        }
+        _isAttacking = !_isAttacking;
     }
 }

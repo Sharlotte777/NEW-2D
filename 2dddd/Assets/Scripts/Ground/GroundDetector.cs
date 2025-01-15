@@ -6,11 +6,6 @@ public class GroundDetector : MonoBehaviour
 {
     private int _amountOfTouchingGround = 0;
 
-    public bool IsGrounded()
-    {
-        return _amountOfTouchingGround > 0;
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Ground _))
@@ -25,5 +20,10 @@ public class GroundDetector : MonoBehaviour
         {
             _amountOfTouchingGround--;
         }
+    }
+
+    public bool IsGrounded()
+    {
+        return _amountOfTouchingGround > 0;
     }
 }

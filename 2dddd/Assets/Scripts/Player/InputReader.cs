@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    public event Action AbilityOfAttackChanged;
-    public event Action AbilityOfDrainChanged;
-
     private int _attackKey = 0;
     private KeyCode _jumpKey = KeyCode.Space;
     private KeyCode _vampirismKey = KeyCode.E;
 
+    public event Action AbilityOfAttackChanged;
+    public event Action AbilityOfDrainChanged;
+
     public bool CanJump { get; private set; }
+    public string NameOfAxis { get; private set; } = "Horizontal";
 
     public void Update()
     {

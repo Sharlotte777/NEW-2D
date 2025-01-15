@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\Indicators\TimeOfVampirism.cs" />
     <Compile Include="Assets\Scripts\Spawner\SpawnerOfCoin.cs" />
     <Compile Include="Assets\Scripts\Player\FoxHealth.cs" />
+    <Compile Include="Assets\Scripts\Player\FoxAnimator.cs" />
     <Compile Include="Assets\Scripts\Enemy\PlayerSearcher.cs" />
     <Compile Include="Assets\Scripts\Buttons\Damager.cs" />
     <Compile Include="Assets\Scripts\Indicators\SmoothSlideHealthBar.cs" />
